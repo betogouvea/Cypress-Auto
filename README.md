@@ -20,7 +20,7 @@ Este repositório contém os testes automatizados utilizando a tecnologia Cypres
    ```
 2. Acesse o diretório e instale as dependências:
    ```sh
-   cd /Users/seu_usuário/Documents/cypress
+   cd /Users/seu_usuário/Documents/Cypress-Auto.git
    npm install
    ```
 3. Execute os testes:
