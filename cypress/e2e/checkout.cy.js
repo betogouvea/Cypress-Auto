@@ -5,7 +5,7 @@ describe("Checkout Tests", () => {
 
   it("Deve finalizar a compra com sucesso", () => {
     cy.addProductToCart();
-    cy.completeCheckout("BetoG", "QA", "44345");
+    cy.completeCheckout("BetoG", "QA", "12345");
     cy.get(".complete-header").should("contain", "Thank you");
   });
 });
