@@ -16,7 +16,7 @@ Este repositório contém os testes automatizados utilizando a tecnologia Cypres
 
 1. Clone o repositório:
    ```sh
-   git clone https://github.com/seu-usuario/
+   git clone https://github.com/betogouvea/Cypress-Auto.git
    ```
 2. Acesse o diretório e instale as dependências:
    ```sh
