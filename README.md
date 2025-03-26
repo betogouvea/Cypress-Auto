@@ -1,8 +1,8 @@
-### 🧪 Teste Técnico QA Clinicorp Solutions
+### 🧪 Teste Técnico 
 
 Este repositório contém os testes automatizados utilizando a tecnologia Cypress. 
 
--
+
 
 # 📂 Testes de Interface - Cypress
 
