@@ -8,7 +8,6 @@ Este repositório contém os testes automatizados utilizando a tecnologia Cypres
 
 ## 🔧 Pré-requisitos
 
-- Teste configurado para -CHIP INTEL-
 - Node.js instalado
 - Cypress instalado globalmente ou via npm/yarn
 
