@@ -1,5 +1,3 @@
-import { contains } from 'jquery';
-
 export class CheckoutOverview{
   private readonly PAY_INFO: string = '[data-test="payment-info-value"]';
   private readonly TOTAL_PRICE: string = '[data-test="total-label"]';
@@ -23,3 +21,4 @@ export class CheckoutOverview{
     .first()
     .click();
   }
+}
