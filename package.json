@@ -1,5 +1,12 @@
 {
   "devDependencies": {
-    "cypress": "^14.2.0"
+    "cypress": "^14.2.0",
+    "typescript": "^5.4.0",
+    "ts-node": "^10.9.2",
+    "@types/node": "^20.12.7"
+  },
+  "scripts": {
+    "cy:run": "cypress run",
+    "cy:open": "cypress open"
   }
 }
