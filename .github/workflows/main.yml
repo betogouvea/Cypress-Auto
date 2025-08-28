@@ -12,32 +12,37 @@ jobs:
   cypress_tests:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout
+      - name: Checkout do código
         uses: actions/checkout@v4
         with:
           fetch-depth: 0
 
-      - name: Setup Node
+      - name: Instalação do Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: '18'
+          node-version: "18"
 
-      - name: Install dependencies
+      - name: Instalação das dependências
         run: npm install
 
       - name: Compilar TypeScript
         run: npx tsc
 
       - name: Selecionar testes impactados
+        id: select-tests
         run: |
-          TESTS=$(node dist/scripts/select-tests.js)
-          echo "TESTS=$TESTS" >> $GITHUB_ENV
-          echo "Testes selecionados: $TESTS"
+          SPECS=$(node dist/scripts/select-tests.js)
+          echo "SPECS=$SPECS" >> $GITHUB_ENV
+          echo "Specs selecionados: $SPECS"
 
       - name: Rodar Testes do Cypress
         run: |
-          echo "Rodando testes: $TESTS"
-          npx cypress run --spec "$TESTS"
+          if [ -z "$SPECS" ] || [ "$SPECS" = "Nenhum teste impactado pelas alterações." ]; then
+            echo "Nenhum teste específico modificado. Encerrando workflow."
+          else
+            echo "Rodando testes: $SPECS"
+            npx cypress run --spec "$SPECS"
+          fi
 
       - name: Salvar vídeos do Cypress
         if: always()
