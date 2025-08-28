@@ -1,0 +1,80 @@
+name: Cypress Tests
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - 'cypress/**'  # Dispara se houver mudanças em arquivos Cypress neste repo
+  pull_request:
+    branches:
+      - main
+    paths:
+      - 'cypress/**'  # Dispara em PRs com mudanças Cypress neste repo
+  workflow_dispatch:
+  repository_dispatch:  # ← NOVO: Permite ser acionado por webhooks externos
+    types: [cypress-updated]
+
+jobs:
+  cypress_tests:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout do código
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Checkout Cypress-Auto repository
+        uses: actions/checkout@v3
+        with:
+          repository: betogouvea/Cypress-Auto
+          path: Cypress-Auto
+          fetch-depth: 0
+          ref: ${{ github.event.client_payload.ref || 'main' }}  # ← Usa a branch do webhook
+
+      - name: Instalação do Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "18"
+
+      - name: Instalação das dependências
+        run: |
+          cd Cypress-Auto
+          npm install
+
+      - name: Compilar TypeScript
+        run: |
+          cd Cypress-Auto
+          npx tsc
+
+      - name: Selecionar testes impactados
+        run: |
+          cd Cypress-Auto
+          TESTS=$(node dist/scripts/select-tests.js)
+          echo "TESTS=$TESTS" >> $GITHUB_ENV
+          echo "Testes selecionados: $TESTS"
+
+      - name: Rodar Testes do Cypress
+        run: |
+          cd Cypress-Auto
+          echo "Rodando testes: $TESTS"
+          npx cypress run --spec "$TESTS"
+
+      - name: Salvar vídeos do Cypress
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: cypress-videos
+          path: Cypress-Auto/cypress/videos
+
+  notifications:
+    runs-on: ubuntu-latest
+    if: always()
+    steps:
+      - name: Envio de notificação de sucesso
+        if: success()
+        run: echo "✅ Todos os testes passaram!" >> $GITHUB_STEP_SUMMARY
+
+      - name: Envio de notificação de falha
+        if: failure()
+        run: echo "❌ Algum teste falhou! Verifique os relatórios." >> $GITHUB_STEP_SUMMARY
