@@ -1,0 +1,50 @@
+name: Cypress Tests
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'cypress/e2e/coffee/**'
+      - 'cypress/e2e/saucedemo/**'
+  workflow_dispatch:
+
+jobs:
+  cypress_tests:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout do código
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Instalação do Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "18"
+
+      - name: Instalação das dependências
+        run: npm install
+
+      - name: Compilar TypeScript
+        run: npx tsc
+
+      - name: Rodar Testes do Cypress
+        run: |
+          # Detecta qual pasta foi alterada
+          if git diff --name-only HEAD^ HEAD | grep -q "cypress/e2e/coffee/"; then
+            echo "Rodando testes COFFEE"
+            npx cypress run --spec "cypress/e2e/coffee/**/*.cy.ts"
+          elif git diff --name-only HEAD^ HEAD | grep -q "cypress/e2e/saucedemo/"; then
+            echo "Rodando testes SAUCEDEMO"
+            npx cypress run --spec "cypress/e2e/saucedemo/**/*.cy.ts"
+          else
+            echo "Rodando TODOS os testes"
+            npx cypress run --spec "cypress/e2e/**/*.cy.ts"
+          fi
+
+      - name: Salvar vídeos do Cypress
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: cypress-videos
+          path: cypress/videos
