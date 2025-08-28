@@ -12,35 +12,32 @@ jobs:
   cypress_tests:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout do código
+      - name: Checkout
         uses: actions/checkout@v4
         with:
           fetch-depth: 0
 
-      - name: Instalação do Node.js
+      - name: Setup Node
         uses: actions/setup-node@v4
         with:
-          node-version: "18"
+          node-version: '18'
 
-      - name: Instalação das dependências
+      - name: Install dependencies
         run: npm install
 
       - name: Compilar TypeScript
         run: npx tsc
 
+      - name: Selecionar testes impactados
+        run: |
+          TESTS=$(node dist/scripts/select-tests.js)
+          echo "TESTS=$TESTS" >> $GITHUB_ENV
+          echo "Testes selecionados: $TESTS"
+
       - name: Rodar Testes do Cypress
         run: |
-          # Detecta qual pasta foi alterada
-          if git diff --name-only HEAD^ HEAD | grep -q "cypress/e2e/coffee/"; then
-            echo "Rodando testes COFFEE"
-            npx cypress run --spec "cypress/e2e/coffee/**/*.cy.ts"
-          elif git diff --name-only HEAD^ HEAD | grep -q "cypress/e2e/saucedemo/"; then
-            echo "Rodando testes SAUCEDEMO"
-            npx cypress run --spec "cypress/e2e/saucedemo/**/*.cy.ts"
-          else
-            echo "Rodando TODOS os testes"
-            npx cypress run --spec "cypress/e2e/**/*.cy.ts"
-          fi
+          echo "Rodando testes: $TESTS"
+          npx cypress run --spec "$TESTS"
 
       - name: Salvar vídeos do Cypress
         if: always()
