@@ -5,7 +5,7 @@ describe ('Teste com Pom', () => {
         let compras = new Pom();
         compras.entrar();
     });
-    it('Adiciona o produto e realiza o check-out', () => {
+    it('Adiciona um produto e realiza o check-out', () => {
         let compras = new Pom();
         compras.addProduct();
         compras.checkOut();

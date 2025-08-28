@@ -19,9 +19,9 @@ function resolveTests(files: string[]): string[] {
 
     // Apenas arquivos .cy.ts dentro dos diretórios de teste
     if (
-      (normalized.startsWith("cypress/e2e/coffee/") ||
-       normalized.startsWith("cypress/e2e/saucedemo/")) &&
-      normalized.endsWith(".cy.ts")
+      (normalized.startsWith('cypress/e2e/coffee/') ||
+       normalized.startsWith('cypress/e2e/saucedemo/')) &&
+      normalized.endsWith("spec.cy.ts")
     ) {
       tests.push(normalized);
     }
