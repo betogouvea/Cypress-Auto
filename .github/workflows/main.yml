@@ -3,9 +3,6 @@ name: Cypress Tests
 on:
   push:
     branches: [main]
-    paths:
-      - 'cypress/e2e/coffee/**'
-      - 'cypress/e2e/saucedemo/**'
   workflow_dispatch:
 
 jobs:
@@ -28,21 +25,11 @@ jobs:
       - name: Compilar TypeScript
         run: npx tsc
 
-      - name: Selecionar testes impactados
-        id: select-tests
+      - name: Selecionar e executar testes
         run: |
           SPECS=$(node dist/scripts/select-tests.js)
-          echo "SPECS=$SPECS" >> $GITHUB_ENV
-          echo "Specs selecionados: $SPECS"
-
-      - name: Rodar Testes do Cypress
-        run: |
-          if [ -z "$SPECS" ] || [ "$SPECS" = "Nenhum teste impactado pelas alterações." ]; then
-            echo "Nenhum teste específico modificado. Encerrando workflow."
-          else
-            echo "Rodando testes: $SPECS"
-            npx cypress run --spec "$SPECS"
-          fi
+          echo "Rodando testes: $SPECS"
+          npx cypress run --spec "$SPECS"
 
       - name: Salvar vídeos do Cypress
         if: always()
