@@ -79,7 +79,7 @@ export class CoffeePom{
     this.MENU.checkTotal();
     this.MENU.selectTotal();
     this.DETAILS.inviteName('Beto');
-    this.DETAILS.inviteEmail('Betogouvea@gmail.com');
+    this.DETAILS.inviteEmail('Beto@gmail.com');
     this.DETAILS.endShop();
     this.DETAILS.confirmMensage();
     }
