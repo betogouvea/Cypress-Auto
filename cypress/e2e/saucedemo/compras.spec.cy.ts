@@ -2,15 +2,15 @@ import { Pom } from './pom';
 
 describe ('Teste com Pom', () => {
     it('teste de login',() => {
-        let shopping = new Pom();
-        shopping.entrar();
+        let compras = new Pom();
+        compras.entrar();
     });
     it('Adiciona o produto e realiza o check-out', () => {
-        let shopping = new Pom();
-        shopping.addProduct();
-        shopping.checkOut();
-        shopping.clientInformation();
-        shopping.overview();
-        shopping.completeCheckout();
+        let compras = new Pom();
+        compras.addProduct();
+        compras.checkOut();
+        compras.clientInformation();
+        compras.overview();
+        compras.completeCheckout();
     });
 });
