@@ -22,7 +22,7 @@ export class Login {
   }
 
   invalidUser(): void{
-    cy.get(this.USER_NAME).first().click().type('EeeeerrorUser');
+    cy.get(this.USER_NAME).first().click().type('ErrorUser');
   }
 
   login(): void {
