@@ -1,5 +1,3 @@
-### 🧪 Teste Técnico 
-
 Este repositório contém os testes automatizados utilizando a tecnologia Cypress. 
 
 
