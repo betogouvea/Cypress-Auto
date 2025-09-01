@@ -4,17 +4,17 @@ on:
   push:
     branches: [main]
   pull_request:
- 
+
 jobs:
   cypress-run:
     runs-on: ubuntu-latest
 
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: Setup Node.js
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v4
         with:
           node-version: 18
 
@@ -35,12 +35,11 @@ jobs:
         run: npx marge cypress/reports/mochawesome/report.json --reportDir cypress/reports/mochawesome
 
       - name: Upload Mochawesome report as artifact
-         if: always()
-         uses: actions/upload-artifact@v4
-         with:
-         name: mochawesome-report
-         path: cypress/reports/mochawesome
-
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: mochawesome-report
+          path: cypress/reports/mochawesome
 
       - name: Send email on failure
         if: failure()
