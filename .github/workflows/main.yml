@@ -35,11 +35,12 @@ jobs:
         run: npx marge cypress/reports/mochawesome/report.json --reportDir cypress/reports/mochawesome
 
       - name: Upload Mochawesome report as artifact
-        if: always()
-        uses: actions/upload-artifact@v3
-        with:
-          name: mochawesome-report
-          path: cypress/reports/mochawesome
+         if: always()
+         uses: actions/upload-artifact@v4
+         with:
+         name: mochawesome-report
+         path: cypress/reports/mochawesome
+
 
       - name: Send email on failure
         if: failure()
