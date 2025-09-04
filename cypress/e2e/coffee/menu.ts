@@ -1,14 +1,17 @@
 export class Menu {
-    private readonly TOTAL: string = '[data-test="checkout"]';
+    private readonly CHECKOUT_BUTTON: string = '[data-test="checkout"]';
 
-    selectTotal(): void {
-        cy.get(this.TOTAL)
+    selectCheckout(): void {
+        cy.get(this.CHECKOUT_BUTTON)
+        .should('exist')
         .first()
         .click();
     }
-    checkTotal(): void {
-        cy.get(this.TOTAL)
-        .trigger('mouseover');
+    hoverCheckout(): void {
+        cy.get(this.CHECKOUT_BUTTON)
+        .should('exist')
+        .trigger('mouseover')
+        .should('be.visible');
     }
 
 }

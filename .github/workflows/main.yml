@@ -31,6 +31,18 @@ jobs:
           echo "Rodando testes: $SPECS"
           npx cypress run --spec "$SPECS"
 
+      - name: Instalar K6
+        run: |
+          curl -L -o k6.zip https://github.com/grafana/k6/releases/download/v0.47.0/k6-v0.47.0-linux-amd64.tar.gz
+          tar -xzf k6.zip
+          sudo mv k6-v0.47.0-linux-amd64/k6 /usr/local/bin/
+
+      - name: Executar testes de performance
+        run: |
+          cd k6
+          k6 run --quiet saucedemo-performance.ts
+          k6 run --quiet coffee-performance.ts
+
       - name: Salvar vídeos do Cypress
         if: always()
         uses: actions/upload-artifact@v4

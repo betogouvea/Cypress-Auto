@@ -1,5 +1,5 @@
 import { CheckoutInformation } from './checkout-information';
-import { checkoutComplete } from './checkout-complete';
+import { CheckoutComplete } from './checkout-complete';
 import { CheckoutOverview } from './checkout-overview';
 import { CheckOut } from './checkout';
 import { Products } from './products';
@@ -9,7 +9,7 @@ export class Pom {
 
   private readonly CHECK_OUT_INFORMATION: CheckoutInformation;
   private readonly CHECK_OUT_OVERVIEW: CheckoutOverview;
-  private readonly CHECK_OUT_COMPLETE: checkoutComplete;
+  private readonly CHECK_OUT_COMPLETE: CheckoutComplete;
   private readonly CHECK_OUT: CheckOut;
   private readonly PRODUCTS: Products;
   private readonly LOGIN: Login;
@@ -17,12 +17,12 @@ export class Pom {
   constructor(){
     this.CHECK_OUT_INFORMATION = new CheckoutInformation;
     this.CHECK_OUT_OVERVIEW = new CheckoutOverview;
-    this.CHECK_OUT_COMPLETE = new checkoutComplete;
+    this.CHECK_OUT_COMPLETE = new CheckoutComplete;
     this.CHECK_OUT = new CheckOut;
     this.PRODUCTS = new Products;
     this.LOGIN = new Login;
   }
-  entrar(){
+  login(){
     this.LOGIN.login();
     this.LOGIN.invalidLogin();
   }
@@ -42,7 +42,7 @@ export class Pom {
     this.CHECK_OUT_INFORMATION.inputName('beto');
     this.CHECK_OUT_INFORMATION.inputLastName('Gouvea');
     this.CHECK_OUT_INFORMATION.inputZip('2233344');
-    this.CHECK_OUT_INFORMATION.continus();
+    this.CHECK_OUT_INFORMATION.continue();
   }
   overview(): void {
     this.CHECK_OUT_OVERVIEW.description('Checkout: Overview');
@@ -51,7 +51,7 @@ export class Pom {
     this.CHECK_OUT_OVERVIEW.finishBuy();
   }
   completeCheckout(): void {
-    this.CHECK_OUT_COMPLETE.writeMensage('Thank you for your order!');
+    this.CHECK_OUT_COMPLETE.writeMessage('Thank you for your order!');
     this.CHECK_OUT_COMPLETE.backToMenu();
   }
 

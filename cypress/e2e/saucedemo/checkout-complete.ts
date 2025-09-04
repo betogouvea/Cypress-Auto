@@ -1,10 +1,11 @@
-export class checkoutComplete{
-  private readonly BACK_HOME: string = '[data-test="complete-header"]';
-  private readonly MENSAGE: string = '[data-test="complete-header"]';
+export class CheckoutComplete {
+  private readonly BACK_HOME: string = '[data-test="back-to-products"]';
+  private readonly MESSAGE: string = '[data-test="complete-header"]';
 
-  writeMensage(value: string): void {
-    cy.get(this.MENSAGE)
-    .contains(value);
+  writeMessage(value: string): void {
+    cy.get(this.MESSAGE)
+    .contains(value)
+    .should('be.visible');
   }
   backToMenu(): void {
     cy.get(this.BACK_HOME)

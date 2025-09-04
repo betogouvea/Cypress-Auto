@@ -1,16 +1,17 @@
 export class DetalhesPagamento {
     private readonly BTN_SUBMIT: string = '#submit-payment';
-    private readonly PAYMENT_DETAIL: string = '.snackbar';
     private readonly EMAIL: string = '#email';
     private readonly NAME: string = '#name';
 
     inviteName(value: string): void{
+        if (!value) throw new Error('Name cannot be empty');
         cy.get(this.NAME)
         .first()
         .click()
         .type(value);
     }
     inviteEmail(value: string): void {
+        if (!value) throw new Error('Email cannot be empty');
         cy.get(this.EMAIL)
         .first()
         .click()
@@ -21,8 +22,8 @@ export class DetalhesPagamento {
         .first()
         .click();
     }
-    confirmMensage(): void {
-        cy.get(this.PAYMENT_DETAIL)
+    confirmMessage(): void {
+        cy.get('.snackbar')
         .should('be.visible')
         .and('contain.text', 'Thanks for your purchase. Please check your email for payment.');
     }

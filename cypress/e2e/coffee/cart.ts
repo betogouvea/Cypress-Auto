@@ -2,9 +2,9 @@ export class Cart {
     private readonly EXPRESSO_PANNA: string = '[data-cy="Espresso-Con Panna"]';
     private readonly MACCHIATO: string = '[data-cy="Espresso-Macchiato"]';
     private readonly CAPPUCCINO: string = '[data-cy="Cappuccino"]';
-    private readonly FLAT_WHITE: string ='[data-cy="Flat-White"]';
+    private readonly FLAT_WHITE: string = '[data-cy="Flat-White"]';
     private readonly AMERICANO: string = '[data-cy="Americano"]';
-    private readonly EXPRESSO: string = '[data-cy="Espresso"]';
+    private readonly ESPRESSO: string = '[data-cy="Espresso"]';
     private readonly LATTE: string = '[data-cy="Cafe-Latte"]';
     private readonly BREVE: string = '[data-cy="Cafe-Breve"]';
     private readonly TOTAL: string = '[data-test="checkout"]';
@@ -17,8 +17,8 @@ export class Cart {
         .contains(value);
     }
     
-    selectExpresso(): void {
-        cy.get(this.EXPRESSO)
+    selectEspresso(): void {
+        cy.get(this.ESPRESSO)
         .first()
         .click();
     }
@@ -30,12 +30,12 @@ export class Cart {
     selectCappuccino(): void {
         cy.get(this.CAPPUCCINO)
         .first()
-        .click()
+        .click();
     }
     selectMocha(): void {
         cy.get(this.MOCHA)
         .first()
-        .click()
+        .click();
     }
     selectFlat(): void {
         cy.get(this.FLAT_WHITE)
@@ -45,7 +45,7 @@ export class Cart {
     selectAmericano(): void {
         cy.get(this.AMERICANO)
         .first()
-        .click({force: true});
+        .click();
     }
     selectLatte(): void {
         cy.get(this.LATTE)

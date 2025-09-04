@@ -6,19 +6,21 @@ export class CheckoutOverview{
 
   description(value: string): void {
     cy.get(this.DESCRIPTION)
-    .contains(value);
+    .should('contain', value)
+    .and('be.visible');
   }
   information(value: string): void {
     cy.get(this.PAY_INFO)
-    .contains(value);
+    .should('contain', value)
+    .and('be.visible');
   }
   totalPrice(value: string): void {
     cy.get(this.TOTAL_PRICE)
-    .contains(value);
+    .should('contain', value)
+    .and('be.visible');
   }
   finishBuy(): void {
     cy.get(this.FINISH)
-    .first()
     .click();
   }
 }

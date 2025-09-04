@@ -1,6 +1,6 @@
 export class CheckoutInformation {
-  private readonly SECOUND_NAME: string = '[data-test="lastName"]';
   private readonly BTN_CONTINUE: string = '[data-test="continue"]';
+  private readonly SECOND_NAME: string = '[data-test="lastName"]';
   private readonly FIRST_NAME: string = '[data-test="firstName"]';
   private readonly ZIP_POST: string = '[data-test="postalCode"]';
 
@@ -11,7 +11,7 @@ export class CheckoutInformation {
     .type(value);
   }
   inputLastName(value: string): void {
-    cy.get(this.SECOUND_NAME)
+    cy.get(this.SECOND_NAME)
     .first()
     .click()
     .type(value);
@@ -22,7 +22,7 @@ export class CheckoutInformation {
     .click()
     .type(value);
   }
-  continus(): void {
+  continue(): void {
     cy.get(this.BTN_CONTINUE)
     .first()
     .click();

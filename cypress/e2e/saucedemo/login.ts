@@ -1,16 +1,16 @@
 export class Login {
   private readonly HOME_PAGE: string = 'https://www.saucedemo.com/';
   private readonly BTN_LOGIN: string = '[data-test="login-button"]';
-  private readonly MENSAGE_ERROR: string = '[data-test="error"]';
+  private readonly MESSAGE_ERROR: string = '[data-test="error"]';
   private readonly USER_NAME: string = '[data-test="username"]';
   private readonly PASSWORD: string = '[data-test="password"]';
 
   validUser(): void {
-    cy.get(this.USER_NAME).first().click().type('standard_user');
+    cy.get(this.USER_NAME).first().click().type(Cypress.env('username'));
   }
 
   validPassword(): void {
-    cy.get(this.PASSWORD).first().click().type('secret_sauce');
+    cy.get(this.PASSWORD).first().click().type(Cypress.env('password'));
   }
 
   btnLogin(): void {
@@ -22,7 +22,7 @@ export class Login {
   }
 
   invalidUser(): void{
-    cy.get(this.USER_NAME).first().click().type('ErrorUser');
+    cy.get(this.USER_NAME).first().click().type(Cypress.env('invalidUsername'));
   }
 
   login(): void {
@@ -36,7 +36,8 @@ export class Login {
     this.invalidUser();
     this.validPassword();
     this.btnLogin();
-    cy.get(this.MENSAGE_ERROR)
-    .contains('Epic sadface: Username and password do not match any user in this service');
+    cy.get(this.MESSAGE_ERROR)
+    .contains('Epic sadface: Username and password do not match any user in this service')
+    .should('be.visible');
   }
 }

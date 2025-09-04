@@ -3,7 +3,7 @@ import { Pom } from './pom';
 describe ('Teste com Pom', () => {
     it('teste de login',() => {
         let compras = new Pom();
-        compras.entrar();
+        compras.login();
     });
     it('Adiciona um produto e realiza o check-out', () => {
         let compras = new Pom();

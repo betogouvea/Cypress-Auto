@@ -3,8 +3,8 @@ import { CoffeePom } from './coffee.pom';
 describe('Teste com POM', () => {
     let coffee = new CoffeePom();
 
-    it('Preço do expresso', () => {
-        coffee.confirmPriceExpresso();
+    it('Preço do espresso', () => {
+        coffee.confirmPriceEspresso();
     });
     it('Preço do cappuccino', () => {
         coffee.confirmPriceCappuccino();
@@ -25,7 +25,7 @@ describe('Teste com POM', () => {
         coffee.confirmPricePanna();
     });
     it('Preço do Flat', () => {
-        coffee.confirmePriceFlat();
+        coffee.confirmPriceFlat();
     });
     it('Preço do Macchiato', () => {
         coffee.confirmPriceMacchiato();
